@@ -1,8 +1,15 @@
 <section>
-  <h1 class="mt-4" style="text-align: center;">Corona Virus Disease 19 <span style="color: #e04141cf;">(Covid-19)</span>
-  </h1>
+  <h1 class="mt-4" style="text-align: center;">Corona Virus Disease 19 </h1>
+  <h1 style="color: #e04141cf; text-align: center;">(Covid-19)</h1>
   <div class="container">
-    <form [formGroup]="countryForm" (ngSubmit)="onSubmit()">
+    <div style="text-align: center;">
+      <p><img style="width: 32px; height: 18px;" src="{{location.country_flag}}" alt="" srcset=""></p>
+      <p><strong>Your Location:</strong> {{location.district}} {{location.city + "," + location.country_name}}</p>
+      <span><strong>Date:</strong> {{location.time_zone.current_time| date :'short'}}
+      </span>
+  </div>
+
+    <form [formGroup]="countryForm" (ngSubmit)="onSubmit()" style="margin: auto; width:100%">
       <div class="form-group mt-5">
         <input class="form-control" type="text" formControlName="country" placeholder="Country name...">
       </div>
@@ -10,60 +17,47 @@
         style="background-color: #e04141cf; border: unset; width: 100%;">Search</button>
     </form>
 
-    <!-- <div [ngStyle]="{'visibility':!displayInfo? 'hidden':'visible'}"> -->
+
+
     <div *ngIf="result.results > 0; else noData">
-      <h1 style="text-align: center; color: #f31e1ecf;" class="mt-5">{{result.response[0].country}}</h1>
+      <h1 style="text-align: center; color: #f31e1ecf;font-family: 'Playfair Display', serif;
+      padding: 10px; background-color: white;" class="mt-4 sticky-top">{{result.response[0].country}}</h1>
       <div class="row">
         <div class="col-md-4 leftContent">
           <div>
-
             <div class="totalCaseTitle">
-              <h4>Total Cases:</h4>
-              <h5>Nombre total de cas:</h5>
+              <h4>Total Cases</h4>
+              <h5 class="lang">Nombre total de cas</h5>
             </div>
-            <div id="totalCase">
-              <span>{{result.response[0].cases.total | number}}</span>
-            </div>
-          </div>
-
+            <span id="totalCase">{{result.response[0].cases.total | number}}</span>
+          </div><br>
           <div>
             <div class="col totalDeathTitle">
-              <h5>Total Deaths:</h5>
-              <h5 id="death">Décès totaux:</h5>
-            </div>
-
-            <span style="
-            font-size: 300%;
-            font-weight: 500;">{{result.response[0].deaths.total | number}}</span>
-          </div>
+              <h5>Total Deaths</h5>
+              <h5 id="death" class="lang">Décès totaux</h5>
+            </div><span
+              style="font-size: 355%; font-weight: 500; color: indianred;">{{result.response[0].deaths.total | number}}</span>
+          </div><br>
           <div>
-
             <div class="col totalTestTitle">
-              <h5>Total Tests:</h5>
-              <h5 id="test">Tests totaux:</h5>
-            </div>
-            <span style="
-            font-size: 300%;
-            font-weight: 500;">{{result.response[0].tests.total | number}}</span>
+              <h5>Total Tests</h5>
+              <h5 id="test" class="lang">Tests totaux</h5>
+            </div><span
+              style="font-size: 300%; font-weight: 500; color: grey;">{{result.response[0].tests.total | number}}</span>
             <div *ngIf="result.response[0].tests.total == null">
               <em>
                 <p style="color: red;">*No testing recorded*</p>
               </em>
             </div>
-
+            <!----><br>
           </div>
           <div class="timeUpdate">
             <div class="col timeTitle">
-              <h5>Day Updated</h5>
-              <h5>Jour mis à jour</h5>
-            </div>
-            <span style="
-              font-size: 200%;
-              font-weight: 300;">{{result.response[0].day}}</span>
+              <h5 style="font-size: 1rem;">Day Updated</h5>
+              <h5 class="lang" style="font-size: 1rem;">Jour mis à jour</h5>
+            </div><span style="font-size: 148%; font-weight: 300;">{{result.response[0].day}}</span>
           </div>
         </div>
-
-
         <div class="col-md-7 rightContent">
           <div class="row">
             <div class="map">
@@ -74,40 +68,25 @@
             <div class="col mx-1">
               <div class="activeCaseTitle">
                 <h5>Active cases</h5>
-                <h5>Cas actifs</h5>
-              </div>
-
-              <span id="activeCase"
-                style="color: rgb(241, 209, 28);">{{result.response[0].cases.active | number}}</span>
-
+                <h5 class="lang">Cas actifs</h5>
+              </div><span id="activeCase" style="color: rgb(241, 209, 28);">{{result.response[0].cases.active | number}}</span>
             </div>
             <div class="col">
-              <h5>Critital cases</h5>
-              <h5>Cas critiques</h5>
-              <span style="color: rgb(250, 69, 37);
-              font-size: 400%;
-              font-weight: 500;">{{result.response[0].cases.critical | number}}</span>
+              <h5>Critical cases</h5>
+              <h5 class="lang">Cas critiques</h5><span
+                style="color: rgb(250, 69, 37); font-size: 400%; font-weight: 500;">{{result.response[0].cases.critical | number}}</span>
             </div>
             <div class="col">
               <h5>Recovered cases</h5>
-              <h5>Cas récupérés</h5>
-              <span style="color: rgb(8, 139, 15);
-              font-size: 400%;
-              font-weight: 500;">{{result.response[0].cases.recovered | number}}</span>
+              <h5 class="lang">Cas récupérés</h5><span
+                style="color: rgb(8, 139, 15); font-size: 400%; font-weight: 500;">{{result.response[0].cases.recovered | number}}</span>
             </div>
           </div>
         </div>
       </div>
     </div>
-
     <ng-template class="" #noData>
       <p style="color: red;"><em>*No result available!*</em></p>
-    </ng-template>
+  </ng-template>
   </div>
-
-
-
-
-
-
 </section>
