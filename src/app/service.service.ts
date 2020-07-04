@@ -21,6 +21,7 @@ export class Service {
 
   constructor(private http: HttpClient) { }
 
+
   getCorona(country: string): Observable<Object> {
     console.log(country);
     return this.http.get(this.urls + country, {

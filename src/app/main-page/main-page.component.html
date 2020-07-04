@@ -7,21 +7,35 @@
       <p><strong>Your Location:</strong> {{location.district}} {{location.city + "," + location.country_name}}</p>
       <span><strong>Date:</strong> {{location.time_zone.current_time| date :'short'}}
       </span>
-  </div>
+    </div>
 
-    <form [formGroup]="countryForm" (ngSubmit)="onSubmit()" style="margin: auto; width:100%">
+    <!-- <form [formGroup]="countryForm" (ngSubmit)="onSubmit()" style="margin: auto; width:100%">
       <div class="form-group mt-5">
         <input class="form-control" type="text" formControlName="country" placeholder="Country name...">
       </div>
       <button class="btn btn-success" [disabled]="!countryForm.valid" type="submit"
         style="background-color: #e04141cf; border: unset; width: 100%;">Search</button>
+    </form> -->
+
+
+    <form [formGroup]="countryForm" (ngSubmit)="onSubmit()">
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Country name..." aria-label="Number" matInput [formControl]="myControl"
+          formControlName="country" [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <button class="btn btn-success" type="submit"
+        style="background-color: #e04141cf; border: unset; width: 100%;">Search</button>
     </form>
 
-
-
     <div *ngIf="result.results > 0; else noData">
-      <h1 style="text-align: center; color: #f31e1ecf;font-family: 'Playfair Display', serif;
-      padding: 10px; background-color: white;" class="mt-4 sticky-top">{{result.response[0].country}}</h1>
+      <!-- <h1 style="text-align: center; color: #f31e1ecf;font-family: 'Playfair Display', serif;
+      padding: 10px; background-color: white;" class="mt-4 sticky-top">{{result.response[0].country}}</h1> -->
+      <h1 style="text-align: center; color: #f31e1ecf;font-family: 'Playfair Display', serif;" class="mt-4">{{result.response[0].country}}</h1>
       <div class="row">
         <div class="col-md-4 leftContent">
           <div>
@@ -69,7 +83,8 @@
               <div>
                 <h5>Active cases</h5>
                 <h5 class="lang">Cas actifs</h5>
-              </div><span id="activeCase" style="color: rgb(241, 209, 28);">{{result.response[0].cases.active | number}}</span>
+              </div><span id="activeCase"
+                style="color: rgb(241, 209, 28);">{{result.response[0].cases.active | number}}</span>
             </div>
             <div class="col-md">
               <h5>Critical cases</h5>
@@ -87,6 +102,6 @@
     </div>
     <ng-template class="" #noData>
       <p style="color: red;"><em>*No result available!*</em></p>
-  </ng-template>
+    </ng-template>
   </div>
 </section>
