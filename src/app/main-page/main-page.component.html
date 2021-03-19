@@ -32,7 +32,7 @@
         style="background-color: #e04141cf; border: unset; width: 100%;">Search</button>
     </form>
 
-    <div *ngIf="result.results > 0; else noData">
+    <div *ngIf="result?.results > 0; else noData">
       <!-- <h1 style="text-align: center; color: #f31e1ecf;font-family: 'Playfair Display', serif;
       padding: 10px; background-color: white;" class="mt-4 sticky-top">{{result.response[0].country}}</h1> -->
       <h1 style="text-align: center; color: #f31e1ecf;font-family: 'Playfair Display', serif;" class="mt-4">{{result.response[0].country}}</h1>
@@ -43,21 +43,21 @@
               <h4>Total Cases</h4>
               <h5 class="lang">Nombre total de cas</h5>
             </div>
-            <span id="totalCase">{{result.response[0].cases.total | number}}</span>
+            <span id="totalCase">{{result?.response[0].cases.total | number}}</span>
           </div><br>
           <div>
             <div class="col totalDeathTitle">
               <h5>Total Deaths</h5>
               <h5 id="death" class="lang">Décès totaux</h5>
             </div><span
-              style="font-size: 355%; font-weight: 500; color: indianred;">{{result.response[0].deaths.total | number}}</span>
+              style="font-size: 355%; font-weight: 500; color: indianred;">{{result?.response[0].deaths.total | number}}</span>
           </div><br>
           <div>
             <div class="col totalTestTitle">
               <h5>Total Tests</h5>
               <h5 id="test" class="lang">Tests totaux</h5>
             </div><span
-              style="font-size: 300%; font-weight: 500; color: grey;">{{result.response[0].tests.total | number}}</span>
+              style="font-size: 300%; font-weight: 500; color: grey;">{{result?.response[0].tests.total | number}}</span>
             <div *ngIf="result.response[0].tests.total == null">
               <em>
                 <p style="color: red;">*No testing recorded*</p>
@@ -69,7 +69,7 @@
             <div class="col timeTitle">
               <h5 style="font-size: 1rem;">Day Updated</h5>
               <h5 class="lang" style="font-size: 1rem;">Jour mis à jour</h5>
-            </div><span style="font-size: 148%; font-weight: 300;">{{result.response[0].day}}</span>
+            </div><span style="font-size: 148%; font-weight: 300;">{{result?.response[0].day}}</span>
           </div>
         </div>
         <div class="col-md-7 rightContent">
@@ -84,17 +84,17 @@
                 <h5>Active cases</h5>
                 <h5 class="lang">Cas actifs</h5>
               </div><span id="activeCase"
-                style="color: rgb(241, 209, 28);">{{result.response[0].cases.active | number}}</span>
+                style="color: rgb(241, 209, 28);">{{result?.response[0].cases.active | number}}</span>
             </div>
             <div class="col-md">
               <h5>Critical cases</h5>
               <h5 class="lang">Cas critiques</h5><span
-                style="color: rgb(250, 69, 37); font-size: 400%; font-weight: 500;">{{result.response[0].cases.critical | number}}</span>
+                style="color: rgb(250, 69, 37); font-size: 400%; font-weight: 500;">{{result?.response[0].cases.critical | number}}</span>
             </div>
             <div class="col-md">
               <h5>Recovered cases</h5>
               <h5 class="lang">Cas récupérés</h5><span
-                style="color: rgb(8, 139, 15); font-size: 400%; font-weight: 500;">{{result.response[0].cases.recovered | number}}</span>
+                style="color: rgb(8, 139, 15); font-size: 400%; font-weight: 500;">{{result?.response[0].cases.recovered | number}}</span>
             </div>
           </div>
         </div>
