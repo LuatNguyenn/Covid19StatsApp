@@ -3,9 +3,9 @@
   <h1 style="color: #e04141cf; text-align: center;">(Covid-19)</h1>
   <div class="container">
     <div style="text-align: center;">
-      <p><img style="width: 32px; height: 18px;" src="{{location.country_flag}}" alt="" srcset=""></p>
-      <p><strong>Your Location:</strong> {{location.district}} {{location.city + "," + location.country_name}}</p>
-      <span><strong>Date:</strong> {{location.time_zone.current_time| date :'short'}}
+      <p><img style="width: 32px; height: 18px;" src="{{location?.country?.flag?.file}}" alt="" srcset=""></p>
+      <p><strong>Your Location:</strong> {{location?.city?.name + ", " + location?.area?.name + ", " + location?.country?.name}}</p>
+      <span><strong>Date:</strong> {{location?.time?.time| date :'short'}}
       </span>
     </div>
 

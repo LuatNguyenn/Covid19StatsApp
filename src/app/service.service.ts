@@ -10,12 +10,12 @@ import { map } from 'rxjs/operators';
 })
 export class Service {
   urls: string = 'https://covid-193.p.rapidapi.com/statistics?country=';
-  key: string = 'e6381b6c46msh7328f7eee0c8bbcp166579jsn086e8cdae269';
+  key: string = '118f47fd3amsh0eefa9c432d5b98p1e4230jsn0eb0e622855d';
   host: string = 'covid-193.p.rapidapi.com';
   result: Object;
 
-  keyLocation = 'bcef465c436e4bf591215b84e8c11aa0';
-  urlLocation = 'https://api.ipgeolocation.io/ipgeo?apiKey=';
+  keyLocation = '118f47fd3amsh0eefa9c432d5b98p1e4230jsn0eb0e622855d';
+  urlLocation = "https://ip-geo-location.p.rapidapi.com/ip/check?format=json";
 
   location: Object;
 
@@ -23,7 +23,7 @@ export class Service {
 
 
   getCorona(country: string): Observable<Object> {
-    console.log(country);
+    console.log("🚀 ~ file: service.service.ts ~ line 26 ~ Service ~ getCorona ~ country", country)
     return this.http.get(this.urls + country, {
       "headers": {
         "x-rapidapi-host": this.host,
@@ -33,7 +33,14 @@ export class Service {
   }
 
   getLocation() {
-    return this.http.get(this.urlLocation + this.keyLocation).pipe(map(location => this.location = location));
+    return this.http.get(this.urlLocation, {
+      "headers": {
+        "x-rapidapi-host": 'ip-geo-location.p.rapidapi.com',
+        "x-rapidapi-key": this.keyLocation
+      }
+    }).pipe(map(location => {
+      return this.location = location;
+    }))
   }
 }
 

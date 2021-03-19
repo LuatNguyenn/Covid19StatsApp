@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Service } from '../service.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import {Observable} from 'rxjs';
-import {map, startWith} from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-page',
@@ -209,30 +209,34 @@ export class MainPageComponent implements OnInit {
     this.service.getLocation().subscribe(
       (val) => {
         this.location = val;
-        this.onLoad(this.location.country_name);
+        console.log("🚀 ~ file: main-page.component.ts ~ line 212 ~ MainPageComponent ~ ngOnInit ~ this.location", this.location)
+        this.onLoad(this.location.country.name);
       },
       (err) => {
         console.log(err);
       }
     );
-    this.filteredOptions = this.myControl.valueChanges
-    .pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
+    // this.filteredOptions = this.myControl.valueChanges
+    // .pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value))
+    // );
   }
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
+  // private _filter(value: string): string[] {
+  //   const filterValue = value.toLowerCase();
 
-    return this.options.filter(option => option.toLowerCase().includes(filterValue));
-  }
-  
+  //   return this.options.filter(option => option.toLowerCase().includes(filterValue));
+  // }
+
   onLoad(country: string) {
     console.log('here:' + this.location);
     this.service.getCorona(country).subscribe(
-      (da) => (this.result = da),
+      (da) => {
+        this.result = da;
+        console.log("🚀 ~ file: main-page.component.ts ~ line 236 ~ MainPageComponent ~ onLoad ~ da", da)
+        
+      },
       (error) => console.log(error),
-      () => console.log('complete')
     );
   }
 
